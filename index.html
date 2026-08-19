@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React-Laravel-Project</title>
+    <link href="bootstrap-5.3.0-alpha1-dist/css/bootstrap.min.css" rel="stylesheet" >
+    <style>
+        .fs-7 {
+            font-size: 0.875rem !important;
+        }
+        .fs-8 {
+            font-size: 0.75rem !important;
+        }
+        .item{
+            border-bottom: 1px solid #9EEAF9;
+            padding: 1rem 0;
+        }
+        .migrateDiv , .typeDiv, .fillableDiv ,.controllerDiv {
+            white-space: pre-wrap;
+        }
+        #container > div{
+            border-bottom: 1px solid #DEE2E6;
+            padding: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid fs-6">
+    <div class="row align-items-start">
+        <div class="col bg-light">
+            <div class="input-group mb-3">
+                <span class="input-group-text">模单</span>
+                <input name="m1" type="text" class="form-control" placeholder="" aria-label="">
+                <span class="input-group-text">模复</span>
+                <input name="m2" type="text" class="form-control" placeholder="" aria-label="">
+            </div>
+            <div id="container">
+
+            </div>
+            <div>
+                <button id="addBtn" class="btn btn-info"> ㊉ 新增字段</button>
+            </div>
+
+            <div class="mt-3">
+                <button id="submit" type="submit" class="btn btn-primary">提交</button>
+            </div>
+
+
+        </div>
+        <div class="col bg-info-subtle fw-lighter">
+            <div class="fw-bold">【Laravel】</div>
+            <div class="item laravel-step1">php artisan make:model #ModelName# -m</div>
+            <div class="item laravel-step2">
+                数据库迁移表<br>
+                $table->id(); <br><br>
+
+                <div class="migrateDiv"></div>
+                <!--$table->integer('sort')->default(0);<br>
+                $table->string('title_zh'); <br>
+
+                $table->text('description1_zh')->nullable(); <br>
+                $table->boolean('is_active')->default(true);<br>
+                $table->string('image')->nullable(); <br><br>-->
+
+                $table->timestamps(); <br>
+            </div>
+            <div class="item laravel-step3">
+                protected $fillable = [<br>
+
+                <div class="fillableDiv"></div>
+                <!--'title_zh',<br>
+                'title_ja',<br>
+                'description1_zh',<br>
+                'description1_ja',<br>
+                'description2_zh',<br>
+                'description2_ja',<br>
+                'image',<br>-->
+
+                ];<br>
+            </div>
+            <div class="item laravel-step4">
+                php artisan migrate
+            </div>
+            <div class="item laravel-step5">
+                php artisan make:filament-resource #ModelName#
+            </div>
+            <div class="item laravel-step6">
+                use UnitEnum;<br>
+                protected static string|UnitEnum|null $navigationGroup = '分类';<br>
+                protected static ?string $navigationLabel = '名称';
+            </div>
+            <div class="item laravel-step7">
+                ➝文件: /app/Filament/Resources/#ModelName#/Schemas/#ModelName#Form.php<br><br>
+
+                FileUpload::make('image')<br>
+                ->image()<br>
+                ->disk('public')<br>
+                ->directory('#urlName#'),<br>
+            </div>
+
+            <div class="item laravel-step8">
+                ➝文件: /app/Filament/Resources/#ModelName#/Tables/#ModelName#Table.php<br><br>
+                ImageColumn::make('image')<br>
+                ->disk('public'),
+            </div>
+            <div class="item laravel-step9">
+                php artisan make:controller Api/#ModelName#Controller --api
+            </div>
+            <div class="item laravel-step11">
+                ➝文件：\app\Http\Controllers\Api\#ModelName#Controller.php<br><br>
+                use Illuminate\Support\Facades\Storage;<br><br>
+
+
+                public function index()<br>
+                {<br>
+                return #ModelName#::where('is_active', true)<br>
+                ->orderBy('sort')<br>
+                ->get();<br>
+                }<br><br><br>
+
+
+                public function index()<br>
+                {<br>
+                    return #ModelName#::query()<br>
+                        ->where('is_active', true)<br>
+                        ->orderBy('sort')<br>
+                        ->get()<br>
+                        ->map(function ($item) {<br>
+                            return [<br>
+                                <div class="controllerDiv">
+
+                                </div>
+                               <!-- 'id' => $item->id,<br>
+                                'title_zh' => $item->title_zh,<br>
+                                'title_ja' => $item->title_ja,<br>
+                                'desc_zh' => $item->desc_zh,<br>
+                                'desc_ja' => $item->desc_ja,<br>
+                                'spec_zh' => $item->spec_zh,<br>
+                                'spec_ja' => $item->spec_ja,<br>
+                                'sort'=> $item->sort,<br>
+                                'is_active' => $item->is_active,<br>
+                                'image' => Storage::disk('public')->url($item->image),<br>-->
+                            ];
+                        });
+						<br>
+                }
+            </div>
+            <div>➝文件：/routes/api.php ※推荐用复数</div>
+            <div class="item laravel-step12">
+                Route::get('/#urlName#', [#ModelName#Controller::class, 'index']);
+            </div>
+            <div class="item laravel-step13">
+
+            </div>
+            <div class="item laravel-step14">
+
+            </div>
+            <div class="item laravel-step15">
+
+            </div>
+        </div>
+        <div class="col bg-warning-subtle fw-lighter">
+            <div class="fw-bold">【React】</div>
+            <div class="item React-step1">
+                Type列表  #ModelName# <br> <br>
+                export interface  #ModelName#{ <br>
+                id: number; <br>
+
+                <div class="typeDiv"></div>
+
+                <!--title_zh: string; <br>
+                title_ja: string; <br>
+                desc_zh: string | null; <br>
+                desc_ja: string | null; <br>
+                spec_zh: string | null; <br>
+                spec_ja: string | null; <br>
+                image: string | null; <br>
+                sort: number;<br>
+                is_active: boolean;<br>-->
+                }<br>
+            </div>
+
+            <div class="item React-step2">
+                api获取数据文件 : 文件名推荐用复数#ModelNames#.ts<br><br>
+                import {#ModelName#} from "@/types/#ModelName#.ts";<br>
+                import apiClient from "@/api/Client.ts";<br>
+                export async function get#ModelNames#(): Promise<#ModelName#[]> {<br><br>
+
+                const response=await apiClient.get<#ModelName#[]>('#urlName#')<br>
+                    return response.data;<br><br>
+
+                    }<br>
+            </div>
+            <div>
+                page页面引用
+            </div>
+            <div class="item React-step3">
+                import type {#ModelName#} from "@/types/#ModelName#.ts";<br>
+                import {get#ModelNames#} from "@/api/#ModelNames#.ts";<br>
+
+                const [#varName#, set#ModelNames#] = useState<#ModelName#[]>([]);<br>
+
+
+                useEffect(()=>{ <br>
+                    get#ModelNames#() <br>
+                        .then( <br>
+                            (data)=>{ <br>
+                                set#ModelNames#(data); <br>
+                            } <br>
+                        ) <br>
+                        .catch( <br>
+                            (error)=>{ <br>
+                                console.log(error);} <br>
+                        )<br>
+                    },[]);<br>
+            </div>
+            <div class="item React-step4"></div>
+        </div>
+    </div>
+</div>
+<script>
+    const container = document.getElementById('container');
+    const addBtn = document.getElementById('addBtn');
+
+    addBtn.addEventListener('click', function () {
+
+        // 创建一组
+        const group = document.createElement('div');
+
+        // 创建名称输入框
+        const nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.placeholder = '字段名称';
+
+
+        // 创建类型下拉框
+        const typeSelect = document.createElement('select');
+
+        typeSelect.innerHTML = `
+                <option value="">请选择类型</option>
+                <option value="string">string</option>
+                <option value="text">text</option>
+                <option value="integer">integer</option>
+                <option value="boolean">boolean</option>
+            `;
+
+        // 动态内容区域
+        const valueContainer = document.createElement('span');
+
+        // 类型改变
+        typeSelect.addEventListener('change', function () {
+
+            // 先清空原来的内容
+            valueContainer.innerHTML = '';
+
+            if (
+                this.value === 'string' ||
+                this.value === 'text' ||
+                this.value === 'integer'
+            ) {
+
+                // 创建输入框
+                const valueInput = document.createElement('input');
+                valueInput.className='form-control';
+
+                valueInput.type = 'text';
+                valueInput.placeholder = '请输入默认值';
+
+                valueContainer.appendChild(valueInput);
+
+            } else if (this.value === 'boolean') {
+
+                // 创建 true / false 下拉框
+                const booleanSelect = document.createElement('select');
+
+                booleanSelect.innerHTML = `
+                        <option value="true">true</option>
+                        <option value="false">false</option>
+                    `;
+
+                valueContainer.appendChild(booleanSelect);
+            }
+        });
+        // checkbox 1
+        const checkbox1 = document.createElement('input');
+
+        checkbox1.type = 'checkbox';
+        checkbox1.name = 'option1[]';
+        checkbox1.value = '1';
+
+
+        // checkbox 2
+        const checkbox2 = document.createElement('input');
+
+        checkbox2.type = 'checkbox';
+        checkbox2.name = 'option2[]';
+        checkbox2.value = '1';
+
+
+        // 添加到这一组
+        group.appendChild(nameInput);
+        group.appendChild(typeSelect);
+        group.appendChild(valueContainer);
+
+        group.appendChild(checkbox1);
+        group.appendChild(document.createTextNode('nullable'));
+
+        group.appendChild(checkbox2);
+        group.appendChild(document.createTextNode('unique'));
+
+        // 添加到页面
+        container.appendChild(group);
+
+    })
+
+
+
+</script>
+
+<script>
+
+   const subBtn=document.querySelector('#submit');
+
+
+   subBtn.addEventListener('click', e => {
+
+       let migrateString='';
+       let fillableString='';
+       let typeString='';
+       let controllerString="'id' => $item->id,\n";
+
+
+       const groups = document.querySelectorAll('#container > div');
+       //alert(groups.length);
+       groups.forEach(function(group) {
+
+           const inputs = group.querySelectorAll('input');
+           const selects = group.querySelectorAll('select');
+
+           // 两个 checkbox
+           const checkboxes = group.querySelectorAll(
+               'input[type="checkbox"]'
+           );
+
+           const input1=inputs[0].value;
+           const input2=inputs[1].value;
+
+           const  selectType=selects[0].value;
+           //console.log(selectType);
+
+           let selectBoolean;
+           if(selectType==='boolean'){
+               selectBoolean=selects[1].value;
+           }
+           //console.log(selectBoolean);exit;
+
+           const nullable = checkboxes[0].checked;
+           const unique = checkboxes[1].checked;
+
+           //console.log(nullable);
+           //console.log(unique);
+
+           fillableString+=`'${input1}',\n`;
+           migrateString+=`$table->${selectType}('${input1}')`;
+           typeString+=`${input1}:`;
+
+           if (input1.includes("image")) {
+               //console.log("包含 image");
+               controllerString+=`'${input1}' => Storage::disk('public')->url($item->${input1}),\n`;
+           }
+           else{
+               controllerString+=`'${input1}' => $item->${input1},\n`;
+           }
+
+           if(selectType!=="boolean"){
+               if(selectType==='integer'){
+                   typeString+='number';
+               }
+               else {
+                   typeString+='string';
+               }
+
+               if(input2!==''){
+                   if(selectType==='integer')
+                   {
+                       migrateString+=`->default(${input2})`;
+                   }
+                   else {
+                       migrateString+=`->default('${input2}')`;
+                   }
+
+               }
+           }
+           else
+           {
+               typeString+='boolean';
+               migrateString+=`->default(${selectBoolean})`;
+           }
+           if(nullable){
+               typeString+=" | null";
+               migrateString+='->nullable()'
+           }
+           if(unique){
+               migrateString+='->unique()'
+
+           }
+           migrateString+=';\n';
+           typeString+=';\n';
+
+
+       });
+
+       console.log(migrateString);
+       document.querySelector('.migrateDiv').innerHTML = migrateString;
+
+       console.log(fillableString);
+       document.querySelector('.fillableDiv').innerHTML = fillableString;
+
+       console.log(typeString);
+       document.querySelector('.typeDiv').innerHTML = typeString;
+
+       console.log(controllerString);
+       document.querySelector('.controllerDiv').innerHTML = controllerString;
+
+
+       const m1 = document.querySelector('[name="m1"]').value;
+       const m2 = document.querySelector('[name="m2"]').value;
+
+       const ModelName=m1;
+       const ModelNames=m2;
+       const varName= m2.charAt(0).toLowerCase() + m2.slice(1);
+       //alert(varName)
+
+       //alert(valName);exit;
+
+       const findBidLetterMore = (m1.match(/[A-Z]/g) || []).length >= 2;
+       //alert(result);
+
+       let urlName;
+       //找到多个大写字母
+       if(findBidLetterMore){
+           urlName = m2
+               .replace(/([A-Z])/g, '-$1')
+               .replace(/^-/, '')
+               .toLowerCase();
+       }
+       else {
+        urlName= m2.toLowerCase();
+       }
+
+       //alert(urlName);
+       document.querySelectorAll('.item').forEach(item => {
+           item.innerHTML = item.innerHTML.replaceAll('#ModelName#', ModelName);
+           item.innerHTML = item.innerHTML.replaceAll('#ModelNames#', ModelNames);
+           item.innerHTML = item.innerHTML.replaceAll('#urlName#', urlName);
+           item.innerHTML = item.innerHTML.replaceAll('#varName#', varName);
+       });
+
+
+
+
+   })
+</script>
+</body>
+</html>
