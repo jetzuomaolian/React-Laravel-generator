@@ -38,20 +38,20 @@
     <div class="row align-items-start">
         <div class="col bg-light">
             <div class="input-group mb-3">
-                <span class="input-group-text">模单</span>
+                <span class="input-group-text">Model</span>
                 <input name="m1" type="text" class="form-control" placeholder="" aria-label="">
-                <span class="input-group-text">模复</span>
+                <span class="input-group-text">Models</span>
                 <input name="m2" type="text" class="form-control" placeholder="" aria-label="">
             </div>
             <div id="container">
 
             </div>
             <div>
-                <button id="addBtn" class="btn btn-info btn-sm"> ㊉ 新增字段</button>
+                <button id="addBtn" class="btn btn-info btn-sm"> ㊉ add a column</button>
             </div>
 
             <div class="mt-3">
-                <button id="submit" type="submit" class="btn btn-primary">提交</button>
+                <button id="submit" type="submit" class="btn btn-primary">Submit</button>
             </div>
 
 
@@ -59,12 +59,12 @@
         <div class="col bg-info-subtle fw-lighter">
             <div class="fw-bold">【Laravel】</div>
             <div class="item laravel-step1">
-                <span class="copyBtn clipboard-icon" data-target="laravel-makeMode"></span> <span class="fw-bold">新建模型</span>
+                <span class="copyBtn clipboard-icon" data-target="laravel-makeMode"></span> <span class="fw-bold">create a new model</span>
                 <div id="laravel-makeMode">php artisan make:model #ModelName# -m</div>
             </div>
             <div class="item laravel-step2">
                 <span class="copyBtn clipboard-icon" data-target="laravel-migrate"></span>
-                <span class="fw-bold">数据库迁移表</span><br>
+                <span class="fw-bold">edit the migration</span><br>
                 $table->id(); <br><br>
 
                 <div id="laravel-migrate" class="migrateDiv"></div>
@@ -80,7 +80,7 @@
             </div>
             <div class="item laravel-step3">
                 <span class="copyBtn clipboard-icon" data-target="laravel-modelFillable"></span>
-                <span class="fw-bold">模型填充</span><br>
+                <span class="fw-bold">make the model mass assignable</span><br>
 
 
                 <div id="laravel-modelFillable" class="fillableDiv"></div>
@@ -96,26 +96,26 @@
             </div>
             <div class="item laravel-step4">
                 <span class="copyBtn clipboard-icon" data-target="laravel-database"></span>
-                <span class="fw-bold">生成数据表</span><br>
+                <span class="fw-bold">create the table</span><br>
                 <div id="laravel-database">php artisan migrate</div>
             </div>
             <div class="item laravel-step5">
                 <span class="copyBtn clipboard-icon" data-target="laravel-filament"></span>
-                <span class="fw-bold">生成Filament后台</span><br>
+                <span class="fw-bold">create a Filament panel</span><br>
                 <div id="laravel-filament">php artisan make:filament-resource #ModelName#</div>
             </div>
             <div class="item laravel-step6">
                 <span class="copyBtn clipboard-icon" data-target="laravel-navigation"></span>
-                <span class="fw-bold">修改导航</span><br>
+                <span class="fw-bold">Edit the category group name and navigation label</span><br>
                 <div id="laravel-navigation">
                 use UnitEnum;<br>
-                protected static string|UnitEnum|null $navigationGroup = '分类';<br>
-                protected static ?string $navigationLabel = '名称';
+                protected static string|UnitEnum|null $navigationGroup = 'navigationGroup';<br>
+                protected static ?string $navigationLabel = 'navigationLabel';
                 </div>
             </div>
             <div class="item laravel-step7">
                 <span class="copyBtn clipboard-icon" data-target="laravel-resource-form"></span>
-                <span class="fw-bold">修改Form</span><br>
+                <span class="fw-bold">Edit Form</span><br>
                 ➝文件: /app/Filament/Resources/#ModelName#/Schemas/#ModelName#Form.php<br><br>
 
                 FileUpload::make('image')<br>
@@ -129,14 +129,14 @@
 
             <div class="item laravel-step8">
                 <span class="copyBtn clipboard-icon" data-target="laravel-resource-table"></span>
-                <span class="fw-bold">修改Table</span><br>
+                <span class="fw-bold">Edit Table</span><br>
                 ➝文件: /app/Filament/Resources/#ModelName#/Tables/#ModelName#Table.php<br><br>
                 ImageColumn::make('image')<br>
                 <div id="laravel-resource-table">->disk('public')</div>
             </div>
             <div class="item laravel-step9">
                 <span class="copyBtn clipboard-icon" data-target="laravel-make-controller"></span>
-                <span class="fw-bold">生成api控制器</span><br>
+                <span class="fw-bold">Create an API controller</span><br>
                 <div id="laravel-make-controller">php artisan make:controller Api/#ModelName#Controller --api</div>
 
             </div>
@@ -145,7 +145,7 @@
                 use Illuminate\Support\Facades\Storage;<br><br>
 
                 <span class="copyBtn clipboard-icon" data-target="laravel-controller-index1"></span>
-                <span class="fw-bold">控制器方式1</span><br>
+                <span class="fw-bold">Controller — Method 1</span><br>
                 public function index()<br>
                 {<br>
                 <div id="laravel-controller-index1">
@@ -157,7 +157,7 @@
                 <br>
 
                 <span class="copyBtn clipboard-icon" data-target="laravel-controller-index2"></span>
-                <span class="fw-bold">控制器方式2</span><br>
+                <span class="fw-bold">Controller — Method 2</span><br>
                 public function index()<br>
                 {<br>
                 <div id="laravel-controller-index2">
@@ -180,8 +180,8 @@
 
             <div class="item laravel-step12">
                 <span class="copyBtn clipboard-icon" data-target="laravel-api"></span>
-                <span class="fw-bold">添加api</span><br>
-                ➝文件：/routes/api.php ※推荐用复数
+                <span class="fw-bold">Add an API route</span><br>
+                ➝文件：/routes/api.php
                 <div id="laravel-api">Route::get('/#urlName#', [#ModelName#Controller::class, 'index']);</div>
             </div>
             <div class="item laravel-step13">
@@ -198,11 +198,11 @@
             <div class="fw-bold">【React】</div>
             <div class="item React-step1">
                 <span class="copyBtn clipboard-icon" data-target="react-typeName"></span>
-                <span class="fw-bold">Type名称</span><br>
+                <span class="fw-bold">Type Name</span><br>
                 <div id="react-typeName">#ModelName# </div>
                 <br>
                 <span class="copyBtn clipboard-icon" data-target="react-typeContent"></span>
-                <span class="fw-bold">Type内容</span><br>
+                <span class="fw-bold">Type Value</span><br>
 
                 <div id="react-typeContent">
                     export interface  #ModelName#{ <br>
@@ -216,11 +216,11 @@
 
             <div class="item React-step2">
                 <span class="copyBtn clipboard-icon" data-target="react-apiName"></span>
-                <span class="fw-bold">api文件</span><br>
-                api获取数据文件 : 文件名推荐用复数  <div id="react-apiName">#ModelNames#.ts</div> <br><br>
+                <span class="fw-bold">API file</span><br>
+                API data-fetching file  <div id="react-apiName">#ModelNames#.ts</div> <br><br>
 
                 <span class="copyBtn clipboard-icon" data-target="react-apiContent"></span>
-                <span class="fw-bold">api内容</span><br>
+                <span class="fw-bold">API file code</span><br>
                 <div id="react-apiContent">
                     import {#ModelName#} from "@/types/#ModelName#.ts";<br>
                     import apiClient from "@/api/Client.ts";<br><br>
@@ -233,7 +233,7 @@
             </div>
             <div class="item React-step3">
                 <span class="copyBtn clipboard-icon" data-target="react-page"></span>
-                <span class="fw-bold">page页面引用</span><br>
+                <span class="fw-bold">Import in the Page</span><br>
                 <div id="react-page">
                     import type {#ModelName#} from "@/types/#ModelName#.ts";<br>
                     import {get#ModelNames#} from "@/api/#ModelNames#.ts";<br>
