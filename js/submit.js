@@ -1,5 +1,6 @@
 export function submit(){
 
+
     const subBtn=document.querySelector('#submit');
     subBtn.addEventListener('click', e => {
 
@@ -98,6 +99,7 @@ export function submit(){
 
 
         });
+        fillableString+=']';
 
         console.log(migrateString);
         document.querySelector('.migrateDiv').innerHTML = migrateString;
