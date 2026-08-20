@@ -10,14 +10,14 @@ export function generate(){
         // 创建名称输入框
         const nameInput = document.createElement('input');
         nameInput.type = 'text';
-        nameInput.placeholder = '字段名称';
+        nameInput.placeholder = 'Column name';
 
 
         // 创建类型下拉框
         const typeSelect = document.createElement('select');
 
         typeSelect.innerHTML = `
-                <option value="">请选择类型</option>
+                <option value="">Select a type</option>
                 <option value="string">string</option>
                 <option value="text">text</option>
                 <option value="integer">integer</option>
@@ -47,7 +47,7 @@ export function generate(){
                 valueInput.className='form-control';
 
                 valueInput.type = 'text';
-                valueInput.placeholder = '请输入默认值';
+                valueInput.placeholder = 'Enter the default value.';
 
                 valueContainer.appendChild(valueInput);
 
