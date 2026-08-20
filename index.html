@@ -164,7 +164,7 @@
             <div class="item React-step1">
                 Type列表  #ModelName# <br> <br>
                 export interface  #ModelName#{ <br>
-                id: number; <br>
+                id:number; <br>
 
                 <div class="typeDiv"></div>
 
@@ -242,6 +242,8 @@
                 <option value="text">text</option>
                 <option value="integer">integer</option>
                 <option value="boolean">boolean</option>
+                <option value="foreignId">foreignId</option>
+
             `;
 
         // 动态内容区域
@@ -256,6 +258,7 @@
             if (
                 this.value === 'string' ||
                 this.value === 'text' ||
+                this.value === 'foreignId' ||
                 this.value === 'integer'
             ) {
 
@@ -370,6 +373,24 @@
            }
            else{
                controllerString+=`'${input1}' => $item->${input1},\n`;
+
+
+           }
+
+           switch (selectType) {
+               case 'boolean':
+                   migrateString+=`->default(${selectBoolean})`;
+                   break;
+               case 'foreignId':
+                   migrateString+=`->constrained('${input2}')->cascadeOnDelete()`;
+                   break;
+               case 'integer':
+                   if(input2!=='')
+                   {migrateString+=`->default(${input2})`;}
+                   break;
+               default:
+                   if(input2!==''){migrateString+=`->default('${input2}')`;};
+
            }
 
            if(selectType!=="boolean"){
@@ -380,22 +401,14 @@
                    typeString+='string';
                }
 
-               if(input2!==''){
-                   if(selectType==='integer')
-                   {
-                       migrateString+=`->default(${input2})`;
-                   }
-                   else {
-                       migrateString+=`->default('${input2}')`;
-                   }
-
-               }
            }
            else
            {
                typeString+='boolean';
-               migrateString+=`->default(${selectBoolean})`;
+               //migrateString+=`->default(${selectBoolean})`;
            }
+
+
            if(nullable){
                typeString+=" | null";
                migrateString+='->nullable()'
