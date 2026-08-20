@@ -59,12 +59,12 @@
         <div class="col bg-info-subtle fw-lighter">
             <div class="fw-bold">【Laravel】</div>
             <div class="item laravel-step1">
-                <span class="copyBtn clipboard-icon" data-target="laravel-makeMode"></span>
+                <span class="copyBtn clipboard-icon" data-target="laravel-makeMode"></span> <span class="fw-bold">新建模型</span>
                 <div id="laravel-makeMode">php artisan make:model #ModelName# -m</div>
             </div>
             <div class="item laravel-step2">
                 <span class="copyBtn clipboard-icon" data-target="laravel-migrate"></span>
-                数据库迁移表<br>
+                <span class="fw-bold">数据库迁移表</span><br>
                 $table->id(); <br><br>
 
                 <div id="laravel-migrate" class="migrateDiv"></div>
@@ -80,7 +80,7 @@
             </div>
             <div class="item laravel-step3">
                 <span class="copyBtn clipboard-icon" data-target="laravel-modelFillable"></span>
-                模型填充<br>
+                <span class="fw-bold">模型填充</span><br>
 
 
                 <div id="laravel-modelFillable" class="fillableDiv"></div>
@@ -96,17 +96,17 @@
             </div>
             <div class="item laravel-step4">
                 <span class="copyBtn clipboard-icon" data-target="laravel-database"></span>
-                生成数据表<br>
+                <span class="fw-bold">生成数据表</span><br>
                 <div id="laravel-database">php artisan migrate</div>
             </div>
             <div class="item laravel-step5">
                 <span class="copyBtn clipboard-icon" data-target="laravel-filament"></span>
-                生成Filament后台<br>
+                <span class="fw-bold">生成Filament后台</span><br>
                 <div id="laravel-filament">php artisan make:filament-resource #ModelName#</div>
             </div>
             <div class="item laravel-step6">
                 <span class="copyBtn clipboard-icon" data-target="laravel-navigation"></span>
-                修改导航<br>
+                <span class="fw-bold">修改导航</span><br>
                 <div id="laravel-navigation">
                 use UnitEnum;<br>
                 protected static string|UnitEnum|null $navigationGroup = '分类';<br>
@@ -115,7 +115,7 @@
             </div>
             <div class="item laravel-step7">
                 <span class="copyBtn clipboard-icon" data-target="laravel-resource-form"></span>
-                修改Form<br>
+                <span class="fw-bold">修改Form</span><br>
                 ➝文件: /app/Filament/Resources/#ModelName#/Schemas/#ModelName#Form.php<br><br>
 
                 FileUpload::make('image')<br>
@@ -129,14 +129,14 @@
 
             <div class="item laravel-step8">
                 <span class="copyBtn clipboard-icon" data-target="laravel-resource-table"></span>
-                修改Table<br>
+                <span class="fw-bold">修改Table</span><br>
                 ➝文件: /app/Filament/Resources/#ModelName#/Tables/#ModelName#Table.php<br><br>
                 ImageColumn::make('image')<br>
                 <div id="laravel-resource-table">->disk('public')</div>
             </div>
             <div class="item laravel-step9">
                 <span class="copyBtn clipboard-icon" data-target="laravel-make-controller"></span>
-                生成api控制器<br>
+                <span class="fw-bold">生成api控制器</span><br>
                 <div id="laravel-make-controller">php artisan make:controller Api/#ModelName#Controller --api</div>
 
             </div>
@@ -145,7 +145,7 @@
                 use Illuminate\Support\Facades\Storage;<br><br>
 
                 <span class="copyBtn clipboard-icon" data-target="laravel-controller-index1"></span>
-                控制器方式1<br>
+                <span class="fw-bold">控制器方式1</span><br>
                 public function index()<br>
                 {<br>
                 <div id="laravel-controller-index1">
@@ -157,7 +157,7 @@
                 <br>
 
                 <span class="copyBtn clipboard-icon" data-target="laravel-controller-index2"></span>
-                控制器方式2<br>
+                <span class="fw-bold">控制器方式2</span><br>
                 public function index()<br>
                 {<br>
                 <div id="laravel-controller-index2">
@@ -180,7 +180,7 @@
 
             <div class="item laravel-step12">
                 <span class="copyBtn clipboard-icon" data-target="laravel-api"></span>
-                添加api<br>
+                <span class="fw-bold">添加api</span><br>
                 ➝文件：/routes/api.php ※推荐用复数
                 <div id="laravel-api">Route::get('/#urlName#', [#ModelName#Controller::class, 'index']);</div>
             </div>
@@ -198,11 +198,11 @@
             <div class="fw-bold">【React】</div>
             <div class="item React-step1">
                 <span class="copyBtn clipboard-icon" data-target="react-typeName"></span>
-                Type名称<br>
-                Type列表  <div id="react-typeName">#ModelName# </div>
+                <span class="fw-bold">Type名称</span><br>
+                <div id="react-typeName">#ModelName# </div>
                 <br>
                 <span class="copyBtn clipboard-icon" data-target="react-typeContent"></span>
-                Type内容<br>
+                <span class="fw-bold">Type内容</span><br>
 
                 <div id="react-typeContent">
                     export interface  #ModelName#{ <br>
@@ -216,11 +216,11 @@
 
             <div class="item React-step2">
                 <span class="copyBtn clipboard-icon" data-target="react-apiName"></span>
-                api文件<br>
+                <span class="fw-bold">api文件</span><br>
                 api获取数据文件 : 文件名推荐用复数  <div id="react-apiName">#ModelNames#.ts</div> <br><br>
 
                 <span class="copyBtn clipboard-icon" data-target="react-apiContent"></span>
-                api内容<br>
+                <span class="fw-bold">api内容</span><br>
                 <div id="react-apiContent">
                     import {#ModelName#} from "@/types/#ModelName#.ts";<br>
                     import apiClient from "@/api/Client.ts";<br><br>
@@ -231,12 +231,9 @@
                 </div>
                 <br>
             </div>
-            <div>
-                page页面引用
-            </div>
             <div class="item React-step3">
                 <span class="copyBtn clipboard-icon" data-target="react-page"></span>
-                api内容<br>
+                <span class="fw-bold">page页面引用</span><br>
                 <div id="react-page">
                     import type {#ModelName#} from "@/types/#ModelName#.ts";<br>
                     import {get#ModelNames#} from "@/api/#ModelNames#.ts";<br>
