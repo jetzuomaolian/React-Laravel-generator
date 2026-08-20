@@ -22,6 +22,15 @@
             border-bottom: 1px solid #DEE2E6;
             padding: 1rem 0;
         }
+        .clipboard-icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-color: #000;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z'/%3E%3Cpath d='M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1A1.5 1.5 0 0 1 6.5 0z'/%3E%3C/svg%3E") no-repeat center;
+            mask-size: contain;
+            cursor:pointer;
+        }
     </style>
 </head>
 <body>
@@ -38,7 +47,7 @@
 
             </div>
             <div>
-                <button id="addBtn" class="btn btn-info"> ㊉ 新增字段</button>
+                <button id="addBtn" class="btn btn-info btn-sm"> ㊉ 新增字段</button>
             </div>
 
             <div class="mt-3">
@@ -49,12 +58,16 @@
         </div>
         <div class="col bg-info-subtle fw-lighter">
             <div class="fw-bold">【Laravel】</div>
-            <div class="item laravel-step1">php artisan make:model #ModelName# -m</div>
+            <div class="item laravel-step1">
+                <span class="copyBtn clipboard-icon" data-target="laravel-makeMode"></span>
+                <div id="laravel-makeMode">php artisan make:model #ModelName# -m</div>
+            </div>
             <div class="item laravel-step2">
+                <span class="copyBtn clipboard-icon" data-target="laravel-migrate"></span>
                 数据库迁移表<br>
                 $table->id(); <br><br>
 
-                <div class="migrateDiv"></div>
+                <div id="laravel-migrate" class="migrateDiv"></div>
                 <!--$table->integer('sort')->default(0);<br>
                 $table->string('title_zh'); <br>
 
@@ -62,12 +75,15 @@
                 $table->boolean('is_active')->default(true);<br>
                 $table->string('image')->nullable(); <br><br>-->
 
+                <br>
                 $table->timestamps(); <br>
             </div>
             <div class="item laravel-step3">
+                <span class="copyBtn clipboard-icon" data-target="laravel-modelFillable"></span>
+                模型填充<br>
                 protected $fillable = [<br>
 
-                <div class="fillableDiv"></div>
+                <div id="laravel-modelFillable" class="fillableDiv"></div>
                 <!--'title_zh',<br>
                 'title_ja',<br>
                 'description1_zh',<br>
@@ -218,261 +234,17 @@
         </div>
     </div>
 </div>
-<script>
-    const container = document.getElementById('container');
-    const addBtn = document.getElementById('addBtn');
-
-    addBtn.addEventListener('click', function () {
-
-        // 创建一组
-        const group = document.createElement('div');
-
-        // 创建名称输入框
-        const nameInput = document.createElement('input');
-        nameInput.type = 'text';
-        nameInput.placeholder = '字段名称';
 
 
-        // 创建类型下拉框
-        const typeSelect = document.createElement('select');
-
-        typeSelect.innerHTML = `
-                <option value="">请选择类型</option>
-                <option value="string">string</option>
-                <option value="text">text</option>
-                <option value="integer">integer</option>
-                <option value="boolean">boolean</option>
-                <option value="foreignId">foreignId</option>
-
-            `;
-
-        // 动态内容区域
-        const valueContainer = document.createElement('span');
-
-        // 类型改变
-        typeSelect.addEventListener('change', function () {
-
-            // 先清空原来的内容
-            valueContainer.innerHTML = '';
-
-            if (
-                this.value === 'string' ||
-                this.value === 'text' ||
-                this.value === 'foreignId' ||
-                this.value === 'integer'
-            ) {
-
-                // 创建输入框
-                const valueInput = document.createElement('input');
-                valueInput.className='form-control';
-
-                valueInput.type = 'text';
-                valueInput.placeholder = '请输入默认值';
-
-                valueContainer.appendChild(valueInput);
-
-            } else if (this.value === 'boolean') {
-
-                // 创建 true / false 下拉框
-                const booleanSelect = document.createElement('select');
-
-                booleanSelect.innerHTML = `
-                        <option value="true">true</option>
-                        <option value="false">false</option>
-                    `;
-
-                valueContainer.appendChild(booleanSelect);
-            }
-        });
-        // checkbox 1
-        const checkbox1 = document.createElement('input');
-
-        checkbox1.type = 'checkbox';
-        checkbox1.name = 'option1[]';
-        checkbox1.value = '1';
-
-
-        // checkbox 2
-        const checkbox2 = document.createElement('input');
-
-        checkbox2.type = 'checkbox';
-        checkbox2.name = 'option2[]';
-        checkbox2.value = '1';
-
-
-        // 添加到这一组
-        group.appendChild(nameInput);
-        group.appendChild(typeSelect);
-        group.appendChild(valueContainer);
-
-        group.appendChild(checkbox1);
-        group.appendChild(document.createTextNode('nullable'));
-
-        group.appendChild(checkbox2);
-        group.appendChild(document.createTextNode('unique'));
-
-        // 添加到页面
-        container.appendChild(group);
-
-    })
-
-
-
+<script type="module">
+    import {generate} from "./js/generateField.js";
+    import {submit} from "./js/submit.js";
+    import {copy} from "./js/copy.js";
+    generate();
+    submit();
+    copy();
 </script>
 
-<script>
 
-   const subBtn=document.querySelector('#submit');
-
-
-   subBtn.addEventListener('click', e => {
-
-       let migrateString='';
-       let fillableString='';
-       let typeString='';
-       let controllerString="'id' => $item->id,\n";
-
-
-       const groups = document.querySelectorAll('#container > div');
-       //alert(groups.length);
-       groups.forEach(function(group) {
-
-           const inputs = group.querySelectorAll('input');
-           const selects = group.querySelectorAll('select');
-
-           // 两个 checkbox
-           const checkboxes = group.querySelectorAll(
-               'input[type="checkbox"]'
-           );
-
-           const input1=inputs[0].value;
-           const input2=inputs[1].value;
-
-           const  selectType=selects[0].value;
-           //console.log(selectType);
-
-           let selectBoolean;
-           if(selectType==='boolean'){
-               selectBoolean=selects[1].value;
-           }
-           //console.log(selectBoolean);exit;
-
-           const nullable = checkboxes[0].checked;
-           const unique = checkboxes[1].checked;
-
-           //console.log(nullable);
-           //console.log(unique);
-
-           fillableString+=`'${input1}',\n`;
-           migrateString+=`$table->${selectType}('${input1}')`;
-           typeString+=`${input1}:`;
-
-           if (input1.includes("image")) {
-               //console.log("包含 image");
-               controllerString+=`'${input1}' => Storage::disk('public')->url($item->${input1}),\n`;
-           }
-           else{
-               controllerString+=`'${input1}' => $item->${input1},\n`;
-
-
-           }
-
-           switch (selectType) {
-               case 'boolean':
-                   migrateString+=`->default(${selectBoolean})`;
-                   break;
-               case 'foreignId':
-                   migrateString+=`->constrained('${input2}')->cascadeOnDelete()`;
-                   break;
-               case 'integer':
-                   if(input2!=='')
-                   {migrateString+=`->default(${input2})`;}
-                   break;
-               default:
-                   if(input2!==''){migrateString+=`->default('${input2}')`;};
-
-           }
-
-           if(selectType!=="boolean"){
-               if(selectType==='integer'){
-                   typeString+='number';
-               }
-               else {
-                   typeString+='string';
-               }
-
-           }
-           else
-           {
-               typeString+='boolean';
-               //migrateString+=`->default(${selectBoolean})`;
-           }
-
-
-           if(nullable){
-               typeString+=" | null";
-               migrateString+='->nullable()'
-           }
-           if(unique){
-               migrateString+='->unique()'
-
-           }
-           migrateString+=';\n';
-           typeString+=';\n';
-
-
-       });
-
-       console.log(migrateString);
-       document.querySelector('.migrateDiv').innerHTML = migrateString;
-
-       console.log(fillableString);
-       document.querySelector('.fillableDiv').innerHTML = fillableString;
-
-       console.log(typeString);
-       document.querySelector('.typeDiv').innerHTML = typeString;
-
-       console.log(controllerString);
-       document.querySelector('.controllerDiv').innerHTML = controllerString;
-
-
-       const m1 = document.querySelector('[name="m1"]').value;
-       const m2 = document.querySelector('[name="m2"]').value;
-
-       const ModelName=m1;
-       const ModelNames=m2;
-       const varName= m2.charAt(0).toLowerCase() + m2.slice(1);
-       //alert(varName)
-
-       //alert(valName);exit;
-
-       const findBidLetterMore = (m1.match(/[A-Z]/g) || []).length >= 2;
-       //alert(result);
-
-       let urlName;
-       //找到多个大写字母
-       if(findBidLetterMore){
-           urlName = m2
-               .replace(/([A-Z])/g, '-$1')
-               .replace(/^-/, '')
-               .toLowerCase();
-       }
-       else {
-        urlName= m2.toLowerCase();
-       }
-
-       //alert(urlName);
-       document.querySelectorAll('.item').forEach(item => {
-           item.innerHTML = item.innerHTML.replaceAll('#ModelName#', ModelName);
-           item.innerHTML = item.innerHTML.replaceAll('#ModelNames#', ModelNames);
-           item.innerHTML = item.innerHTML.replaceAll('#urlName#', urlName);
-           item.innerHTML = item.innerHTML.replaceAll('#varName#', varName);
-       });
-
-
-
-
-   })
-</script>
 </body>
 </html>
