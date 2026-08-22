@@ -99,7 +99,7 @@ export function submit(){
 
 
         });
-        fillableString+=']';
+        fillableString+='];';
 
         console.log(migrateString);
         document.querySelector('.migrateDiv').innerHTML = migrateString;
